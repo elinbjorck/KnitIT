@@ -1,0 +1,21 @@
+ID, GarmentTypeName, PartName, Required, Priority
+SS000, Sweater, Sleve, Yes, 3
+HT000, Hat, Top, Yes, 3
+MT000, Mitten, Top, Yes, 4
+SN000, Sweater, Neckhole, Yes, 3
+VN000, Vest, Neckhole, Yes, 3
+HE000, Hat, Edge, No, 1
+SE000, Sweater, Edge, No, 1
+VE000, Vest, Edge, No, 1
+ME000, Mitten, Edge, Yes, 1
+SM000, Scarf, Midpart, Yes, 1
+SM001, Sweater, Midpart, Yes, 2
+MM000, Mitten, Midpart, Yes, 2
+MT000, Mitten, Thumb, Yes, 3
+
+
+
+
+
+
+

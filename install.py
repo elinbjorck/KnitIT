@@ -80,6 +80,18 @@ for name in TABLES:
             print("already exists.")
         else:
             print(err.msg)
+print("Creating views")
+try:
+    cursor.execute("CREATE VIEW PartsPerType AS "
+    "SELECT gt.name, COUNT(gtp.id) AS numberOfParts "
+    "FROM garmenttype AS gt "
+    "JOIN garmenttypepart AS gtp ON gt.id = gtp.garmenttypeid "
+    "WHERE gtp.required = 1 "
+    "GROUP BY gtp.garmenttypeid")
+
+    print("Views created OK")
+except con.errors.ProgrammingError as error:
+    print(error)
 
 cursor.close()
 cnx.close()

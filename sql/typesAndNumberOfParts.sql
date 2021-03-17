@@ -1,3 +1,4 @@
+create view test as
 select gt.name, count(gtp.id)
 from garmenttype as gt
 join garmenttypepart as gtp on gt.id = gtp.garmenttypeid

@@ -1,14 +1,12 @@
-Name, PartName, Instructions, MeasurementsNeeded
-RaglanSleve, Sleve, Make two raglan sleves, length circumference 
-Rectangular InsertSleve, Sleve, Make two holes for the sleves. Make two sleves. Attatch the sleves to the holes, Length circumference
-Curved InsertSleve, Sleve, Make two fancy curved holes. make two sleves with fancy curved edges, length circumferenceTop circumference bottom
-Basic Crown, Top, Make your hat smaler as you go, none
-Spiral Crown, Top, Make a fancy spiraled crown you fancy fuck, none. 
-Rectangular MidPart, Midpart, Just knit until you reach the desired length, lengt circumference
-Shaped MidPart, Midpart, Increase and decrease as you go to acomplish the desired curves, list of circumferences and what height they should be
-RibbedEdge, Edge, K1 p1 repeat until you reach desired width, width
-V-neck, Neckhole, Make a V-neck, depth
-Round Neck, Neckhole, Make a round neck, none
-Straight Neck, Neckhole, Do nothing you lazy fuck, none
-
-
+ID, Name, PartID, Instructions, MeasurementsNeeded
+1, RaglanSleve, 1, Make two raglan sleves, length circumference 
+2, Rectangular InsertSleve, 1, Make two holes for the sleves. Make two sleves. Attatch the sleves to the holes, Length circumference
+3, Curved InsertSleve, 1, Make two fancy curved holes. make two sleves with fancy curved edges, length circumferenceTop circumference bottom
+4, Basic Crown, 2, Make your hat smaler as you go, none
+5, Spiral Crown, 2, Make a fancy spiraled crown you fancy fuck, none. 
+6, Rectangular MidPart, 5, Just knit until you reach the desired length, lengt circumference
+7, Shaped MidPart, 5, Increase and decrease as you go to acomplish the desired curves, list of circumferences and what height they should be
+8, RibbedEdge, 4, K1 p1 repeat until you reach desired width, width
+9, V-neck, 3, Make a V-neck, depth
+10, Round Neck, 3, Make a round neck, none
+11, Straight Neck, 3, Do nothing you lazy fuck, none

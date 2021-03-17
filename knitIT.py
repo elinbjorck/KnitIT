@@ -16,7 +16,7 @@ def newGarment(cursor):
     YarnTestHeight = ""
     YarnTestWeight = ""
 
-    cursor.execute("SELECT name, numberofparts FROM partspertype")
+    cursor.execute("SELECT name, numberofparts, id FROM partspertype")
 
     garmentTypes = cursor.fetchall()
 
@@ -26,24 +26,45 @@ def newGarment(cursor):
         i += 1
     print("Quit (0)")
     
-    garmentType = askForNumber("What would you like to do?", 0, len(garmentTypes))
-    if garmentType == 0:
+    choice = askForNumber("What would you like to do?", 0, len(garmentTypes))-1
+
+    if choice == -1:
         return False
-    askForRequiredConstructions(garmentType, cursor)
+    
+    garmentType = garmentTypes[choice][2]
+    print(askForConstructions(garmentType, cursor))
+    return True
 
-def askForRequiredConstructions(garmentTypeId, cursor)
-    constructions = ()
+def askForConstructions(garmentTypeId, cursor):
+    choosenConstructions = []
 
-    cursor.execute("SELECT p.name, partid FROM garmenttypepart AS gtp "
-                   "JOIN part AS p ON p.id = gtp.partid "
-                   "WHERE gtp.garmenttypeid = %s and gtp.required = 1", (garmentTypeId,))
+    cursor.execute("SELECT p.name, gtp.partid, gtp.required FROM garmenttypepart AS gtp "
+    "JOIN part AS p ON p.id = gtp.partid "
+    "WHERE gtp.garmenttypeid = %s "
+    "ORDER BY gtp.required", (garmentTypeId,))
 
     partsNeeded = cursor.fetchall()
     for part in partsNeeded:
-        
+        if part[2] == 0:
+            answer = yesNoQuestion(f"Would you like to have a {part[0]}")
+            if answer == "n":
+                continue
+        cursor.execute("SELECT name, id, measurementsneeded FROM construction "
+                       "WHERE partid = %s", (part[1],)) 
+        constructions = cursor.fetchall()
+        print(constructions)
+        print(f"Chose a type pf {part[0]}:")
 
-def askForOptionalConstructions():
-    pass
+        i = 1
+        for thing in constructions:
+            print(f"({i}) {thing[0]}")
+            i += 1
+
+        choice = askForNumber("Pick a construction: ", 1, len(constructions))-1
+        choosenConstructions.append((constructions[choice][1], constructions[choice][2]))
+
+    return choosenConstructions
+
 
 def askForNumber(message, min, max):
     choice = input(message)
@@ -60,6 +81,15 @@ def askForNumber(message, min, max):
         choice = askForNumber(message, min, max)
 
     return choice
+
+def yesNoQuestion(message):
+    answer = input(f"{message} Y/N: ")
+    answer = answer.lower()
+    print(answer)
+    if answer != "y" and answer != "n":
+        print("Please answer 'Y' or 'N'")
+        answer = yesNoQuestion(message)
+    return answer
     
 
 

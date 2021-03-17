@@ -83,7 +83,7 @@ for name in TABLES:
 print("Creating views")
 try:
     cursor.execute("CREATE VIEW PartsPerType AS "
-    "SELECT gt.name, COUNT(gtp.id) AS numberOfParts "
+    "SELECT gt.id, gt.name, COUNT(gtp.id) AS numberOfParts "
     "FROM garmenttype AS gt "
     "JOIN garmenttypepart AS gtp ON gt.id = gtp.garmenttypeid "
     "WHERE gtp.required = 1 "

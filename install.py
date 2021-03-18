@@ -34,7 +34,7 @@ except con.errors.Error as error:
 
 DTLConstruction = ["int", "varchar(80)", "int", "varchar(200)", "varchar(100)"]
 DTLDecoration = ["int", "varchar(80)", "varchar(200)", "varchar(100)", "int", "int"]
-DTLGarment = ["int", "varchar(80)", "int", "int", "int", "int"]
+DTLGarment = ["int", "varchar(80)", "int", "float", "float", "float"]
 DTLGarmentConstruction = ["int", "int", "int", "Varchar(100)"]
 DTLGarmentConstructionDecoration = ["int", "int", "int", "varchar(80)"]
 DTLGarmentType = ["int", "varchar(80)"]
@@ -82,6 +82,14 @@ for name in TABLES:
             print(err.msg)
 print("Creating views")
 try:
+    cursor.execute("create view instructionsInOrder as "
+    "select g.id, g.Name, c.Instructions, gtp.Priority "
+    "FROM garment as g "
+    "join garmentconstruction as gc on g.id = gc.garmentID "
+    "join construction as c on c.id = gc.ConstructionID "
+    "join garmenttypepart as gtp on c.PartID = gtp.PartID "
+    "order by gtp.Priority")
+
     cursor.execute("CREATE VIEW PartsPerType AS "
     "SELECT gt.id, gt.name, COUNT(gtp.id) AS numberOfParts "
     "FROM garmenttype AS gt "

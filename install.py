@@ -87,7 +87,8 @@ try:
     "FROM garment as g "
     "join garmentconstruction as gc on g.id = gc.garmentID "
     "join construction as c on c.id = gc.ConstructionID "
-    "join garmenttypepart as gtp on c.PartID = gtp.PartID "
+    "join garmenttypepart as gtp "
+    "on c.PartID = gtp.PartID and gtp.garmenttypeid = g.garmenttypeid "
     "order by gtp.Priority")
 
     cursor.execute("CREATE VIEW PartsPerType AS "

@@ -28,6 +28,7 @@ def mainMenu():
         newGarment()
     if answer == 2:
         viewGarments()
+    return True
 
 
 def newGarment():
@@ -63,12 +64,33 @@ def newGarment():
     cnx.commit()
 
 def viewGarments():
-    cursor.execute("SELECT g.id, g.name, gt.name"
-    "FROM garment AS g"
+    cursor.execute("SELECT g.id, g.name, gt.name "
+    "FROM garment AS g "
     "JOIN garmenttype AS gt ON gt.id = g.garmenttypeid")
 
-    print(cursor.fetchall())
+    existingGarments = cursor.fetchall()
+    i = 1
+    for thing in existingGarments:
+        print(f"({i}) {thing[1]}: {thing[2]}")
+        i += 1
+    print("(0) Main menu")
 
+    answer = askForNumber("", 0, len(existingGarments))-1
+
+    if answer == -1:
+        return
+
+    cursor.execute("SELECT instructions "
+    "FROM instructionsinorder "
+    "WHERE id = %s "
+    "order by priority", (existingGarments[answer][0],))
+
+    instructions = cursor.fetchall()
+    for thing in instructions:
+        print(thing[0])
+    
+
+    0
 def askForConstructions(garmentTypeId):
 
     choosenConstructions = []
